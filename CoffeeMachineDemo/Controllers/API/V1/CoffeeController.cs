@@ -25,6 +25,6 @@ public class CoffeeController : ControllerBase
         
         _brewCoffeeService.CountRequest();
         
-        return _brewCoffeeService.IsEveryFifthRequest() ? new ObjectResult(StatusCode(HttpStatusCode.ServiceUnavailable.GetHashCode())) : Ok(_brewCoffeeService.GetInfo());
+        return _brewCoffeeService.IsEveryFifthRequest() ? StatusCode(503, String.Empty) : Ok(_brewCoffeeService.GetInfo());
     }
 }

@@ -1,28 +1,33 @@
 using Business.DTO;
+using Commons.Helpers;
 
 namespace Business.Services;
 
-public class BrewCoffeeService
+public class BrewCoffeeService : IBrewCoffeeService
 {
     private int _count;
 
-    public void CountRequest()
+    public virtual void CountRequest()
     {
         _count++;
     }
 
-    public bool IsEveryFifthRequest()
+    public virtual bool IsEveryFifthRequest()
     {
         return _count % 5 == 0;
     }
 
-    public bool IsOnApril1st(DateTime  date)
+    public virtual bool IsOnApril1st(DateTime  date)
     {
         return date.Month == 4 && date.Day == 1;
     }
     
-    public BrewCoffeeDto GetInfo()
+    public virtual BrewCoffeeDto GetInfo()
     {
-        return null;
+        return new BrewCoffeeDto()
+        {
+            Message = "Your piping hot coffee is ready",
+            Prepared = KoreaDateTimeHelper.Now()
+        };
     }
 }
