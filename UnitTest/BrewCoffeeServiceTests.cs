@@ -11,10 +11,11 @@ public class BrewCoffeeServiceTests
     public void IsOnApril1st_ReturnsTrue_IfAprilFools()
     {
         var service = new BrewCoffeeService();
-        var result = service.IsOnApril1st(new DateTime(2025, 4, 1));
-        var resultFail = service.IsOnApril1st(new DateTime(2025, 8, 1));
-        Assert.IsTrue(result);
-        Assert.IsFalse(resultFail);
+        var pass = service.IsOnApril1st(new DateTime(2025, 4, 1));
+        Assert.IsTrue(pass);
+        
+        var fail = service.IsOnApril1st(new DateTime(2025, 8, 1));
+        Assert.IsFalse(fail);
     }
 
     [TestMethod]
@@ -22,8 +23,12 @@ public class BrewCoffeeServiceTests
     {
         var service = new BrewCoffeeService();
 
-        for (int i = 0; i < 4; i++) service.CountRequest(); // 1 to 4
-        Assert.IsFalse(service.IsEveryFifthRequest());
+        // 1 to 4
+        for (int i = 0; i < 4; i++)
+        {
+            service.CountRequest();
+            Assert.IsFalse(service.IsEveryFifthRequest());
+        }
 
         service.CountRequest(); // 5th
         Assert.IsTrue(service.IsEveryFifthRequest());
