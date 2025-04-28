@@ -2,7 +2,7 @@ namespace Commons.Helpers;
 
 public static class KoreaDateTimeHelper
 {
-    private static readonly string _koreaTimeZone = "Asia/Seoul";
+    private static readonly string _koreaTimeZone = "Korea Standard Time";
 
     public static DateTime Now()
     {

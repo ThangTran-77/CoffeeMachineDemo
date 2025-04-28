@@ -1,12 +1,17 @@
 using Business.Services;
+using Microsoft.OpenApi.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+// Add Swagger document
+var swaggerDoc = builder.Configuration.GetSection("SwaggerDoc").Get<OpenApiInfo>();
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc(swaggerDoc.Version, swaggerDoc);
+});
 
 builder.Services.AddControllers();
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-builder.Services.AddOpenApi();
 
 builder.Services.AddSingleton<IBrewCoffeeService, BrewCoffeeService>();
 
@@ -15,7 +20,9 @@ var app = builder.Build();
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.MapOpenApi();
+    // http://localhost:port/swagger/index.html
+    app.UseSwagger();
+    app.UseSwaggerUI(); // Optional: customize UI here
 }
 
 app.UseHttpsRedirection();

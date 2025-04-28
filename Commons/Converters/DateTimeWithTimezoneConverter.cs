@@ -5,7 +5,7 @@ namespace Commons.Converters;
 
 public class DateTimeWithTimezoneConverter :  JsonConverter<DateTime>
 {
-    private const string Format = "yyyy-MM-ddTHH:mm:sszzz";
+    private const string Format = "yyyy-MM-ddTHH:mm:sszzz"; // yyyy-MM-dd'T'HH:mm:sszzz
 
     public override DateTime Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
