@@ -14,7 +14,7 @@ public class CoffeeController(IBrewCoffeeService brewCoffeeService) : Controller
     {
         if (brewCoffeeService.IsOnApril1st(DateTime.Now))
         {
-            return StatusCode(CustomHttpStatusEnuCode.ImATeapot.GetHashCode(),  "I’m a teapot");
+            return StatusCode(CustomHttpStatusEnumCode.ImATeapot.GetHashCode(),  "I’m a teapot");
         }
         
         brewCoffeeService.CountRequest();
