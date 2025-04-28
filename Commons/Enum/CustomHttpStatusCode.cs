@@ -1,6 +1,6 @@
 namespace Commons.Enum;
 
-public enum CustomHttpStatusEnumCode
+public enum CustomHttpStatusCode
 {
     ImATeapot = 418
 }
