@@ -7,26 +7,18 @@ namespace CoffeeMachineDemo.Controllers.API.V1;
 
 [ApiController]
 [Route("api/v1/[controller]")]
-public class CoffeeController : ControllerBase
+public class CoffeeController(IBrewCoffeeService brewCoffeeService) : ControllerBase
 {
-    private IBrewCoffeeService  _brewCoffeeService;
-
-    public CoffeeController(IBrewCoffeeService brewCoffeeService)
-    {
-        _brewCoffeeService = brewCoffeeService;
-    }
-    
     [HttpGet("brew-coffee")]
     public async Task<ObjectResult> GetBrewCoffee()
     {
-        if (_brewCoffeeService.IsOnApril1st(DateTime.Now))
+        if (brewCoffeeService.IsOnApril1st(DateTime.Now))
         {
             return StatusCode(CustomHttpStatusEnuCode.ImATeapot.GetHashCode(),  "I’m a teapot");
-            ;
         }
         
-        _brewCoffeeService.CountRequest();
+        brewCoffeeService.CountRequest();
         
-        return _brewCoffeeService.IsEveryFifthRequest() ? StatusCode(HttpStatusCode.ServiceUnavailable.GetHashCode(), String.Empty) : Ok(_brewCoffeeService.GetInfo());
+        return brewCoffeeService.IsEveryFifthRequest() ? StatusCode(HttpStatusCode.ServiceUnavailable.GetHashCode(), String.Empty) : Ok(brewCoffeeService.GetInfo());
     }
 }
